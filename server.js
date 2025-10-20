@@ -1,17 +1,12 @@
-const express = require('express');
-const path = require('path');
+// server.js
+require('dotenv').config();
+const app = require('./app'); // <-- load your app.js
+const http = require('http');
 
-const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Serve static files in the travlr folder
-app.use(express.static(__dirname));
+const server = http.createServer(app);
 
-// Default route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Website running at http://localhost:${port}`);
 });
